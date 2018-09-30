@@ -1,10 +1,13 @@
 body {
-	background-color: #232323;
+	background: #73C8A9;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #373B44, #73C8A9);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #373B44, #73C8A9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	font-family: Roboto, sans-serif;
 }
 
 h1 {
-	background-color: magenta;
+	background-color: steelblue;
 	margin: 0px;
 	padding: 10px 20px;
 	text-transform: uppercase;
@@ -14,17 +17,26 @@ h1 span {
 	float: right;
 }
 
+h1 span:hover {
+	color: lightgreen;
+	cursor: pointer;
+}
+
 input {
 	font-size: 18px;
 	background-color: #f7f7f7;
 	width: 327px;
 	padding: 13px 13px 13px 20px;
 	margin: 0;
-	border: none;
+	border: none; 
+}
+
+input:active {
+	value: "";
 }
 
 span {
-	background: red;
+	background: steelblue;
 	height: 40px;
 	width: 0;
 	margin-right: 20px;
@@ -33,20 +45,31 @@ span {
 	color: white;
 }
 
+span:hover {
+	background: red;
+	cursor: pointer;
+}
+
 li {
 	height: 40px;
 	line-height: 40px;
 	background-color: white;
-	/*width: 360px;*/
 	overflow-wrap: wrap;
+	font-weight: bold;
 }
 
 li:nth-child(2n) {
 	background-color: #f7f7f7
 }
 
+li span {
+	opacity: 0;
+	transition: 0.2s linear;
+}
+
 li:hover span {
 	width: 40px;
+	opacity: 1;
 }
 
 ul {

@@ -5,7 +5,6 @@ var list = {
 	input: $("input"),
 	hide:  $("h1 span"),
 	hidden: false,
-	inputClicked: false,
 	init: function() {
 		//Delegate an event handler to the ul element
 		//so that clicks on any spans will bubble up
@@ -15,39 +14,44 @@ var list = {
 			$(this).parent().fadeOut( 400, function () {
 				$(this).remove();
 			});
+			event.stopPropagation();
 		});
 
 		list.ulist.on("click", "li", function() {
 			$(this).css("color", "gray");
 			$(this).css("text-decoration", "line-through");
-
+			event.stopPropagation();
 		});
 
 		//Insert new element in list
 		list.input.on("keypress", function(event) {
 			if(event.which === 13) {
-				list.ulist.append("<li><span>X </span>"
+				list.ulist.append("<li><span><i class=\"far fa-trash-alt\"></i></span>"
 					        		+ $(this).val()
 					        		+ "</li>");
 				$(this).val("");
 			}
 		});
 
-		list.input.on("click", function() {
-			if(!(list.inputClicked)) {
-				list.inputClicked = true;
+		list.input.on("focusin", function() {
+			$(this).val("");
+		});
 
-				$(this).val("");
-			}
+		list.input.on("focusout", function() {
+			$(this).val("Add New Todo");
 		});
 
 		list.hide.on("click", function() {
 			if( !(list.hidden) ) {
 				list.input.fadeOut();
 				list.hidden = true;
+				$(this).text("+");
 			} else {
 				list.input.fadeIn();
 				list.hidden = false;
+				$(this).text("-");
+				// list.input.val("Add New Todo")
+				list.inputClicked = false;
 			}
 		});
 	}
