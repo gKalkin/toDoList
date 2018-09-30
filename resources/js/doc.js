@@ -3,6 +3,9 @@ var list = {
 	todos: $("li"),
 	trash: $("span"),
 	input: $("input"),
+	hide:  $("h1 span"),
+	hidden: false,
+	inputClicked: false,
 	init: function() {
 		//Delegate an event handler to the ul element
 		//so that clicks on any spans will bubble up
@@ -27,6 +30,24 @@ var list = {
 					        		+ $(this).val()
 					        		+ "</li>");
 				$(this).val("");
+			}
+		});
+
+		list.input.on("click", function() {
+			if(!(list.inputClicked)) {
+				list.inputClicked = true;
+
+				$(this).val("");
+			}
+		});
+
+		list.hide.on("click", function() {
+			if( !(list.hidden) ) {
+				list.input.fadeOut();
+				list.hidden = true;
+			} else {
+				list.input.fadeIn();
+				list.hidden = false;
 			}
 		});
 	}
